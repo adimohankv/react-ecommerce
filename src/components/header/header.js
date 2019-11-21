@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 
 import './header.scss';
 import { ReactComponent as Logo} from '../../assests/logo.svg';
-import { auth } from '../../firebase/utils'
+import { auth } from '../../firebase/utils';
+import CartIcon from '../cart-icon/cart-icon';
+import CartDropdown from '../cart-dropdown/cart-dropdown';
 
 const Header = (props) => {
     console.log(props)
@@ -21,14 +23,21 @@ const Header = (props) => {
                     ? <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
                     : <Link className="option" to="/signin">SIGN IN</Link>
                 }
+                <CartIcon />
             </nav>
+            {
+                props.toogleCartHidden
+                    ? null
+                    : <CartDropdown />
+            }
         </div>
     )
 }
 
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.user.currentUser
+        currentUser: state.user.currentUser,
+        toogleCartHidden: state.cart.hidden
     }
 }
 
