@@ -9,7 +9,6 @@ import CartIcon from '../cart-icon/cart-icon';
 import CartDropdown from '../cart-dropdown/cart-dropdown';
 
 const Header = (props) => {
-    console.log(props)
     return (
         <div className="header">
             <Link className="logo-container" to="/">

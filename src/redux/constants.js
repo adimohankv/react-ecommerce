@@ -3,5 +3,6 @@ export const USER = Object.freeze({
 });
 
 export const CART = Object.freeze({
-    TOOGLE_CART_HIDDEN: "TOOGLE_CART_HIDDEN"
+    TOOGLE_CART_HIDDEN: "TOOGLE_CART_HIDDEN",
+    ADD_ITEM: "ADD_ITEM"
 });
