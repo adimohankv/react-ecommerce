@@ -6,8 +6,12 @@ import Homepage from './pages/homepage/homepage';
 import ShopPage from './pages/shop-page/shop-page';
 import Header from './components/header/header';
 import Login from './pages/login-page/login-page';
+import Checkout from './pages/checkout/checkout';
+
 import { auth, createUserProfileDocument } from './firebase/utils';
-import { setCurrentUser } from './redux/user/user.actions'
+import { setCurrentUser } from './redux/user/user.actions';
+import { selectCurrentUser } from './redux/user/user.selector';
+
 import './App.css';
 
 class App extends React.Component {
@@ -45,15 +49,16 @@ class App extends React.Component {
                         path="/signin" 
                         render={() => this.props.currentUser ? (<Redirect to="/"/>) : <Login />}
                     />
+                    <Route exact path="/checkout" component={Checkout} />
                 </Switch>
             </div>
         );
     };
 };
 
-const mapStateToProps = ({user}) => {
+const mapStateToProps = (state) => {
     return {
-        currentUser: user.currentUser
+        currentUser: selectCurrentUser(state)
     }
 }
 
