@@ -5,8 +5,14 @@ import thunk from 'redux-thunk'
 
 import rootReducer from './root-reducer';
 
-const middleware = [Logger, thunk];
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const middleware = [thunk];
+
+let composeEnhancers = compose;
+
+if (process.env.NODE_ENV === 'development') {
+    middleware.push(Logger);
+    composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+}
 
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));
 
