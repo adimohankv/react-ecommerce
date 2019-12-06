@@ -2,7 +2,7 @@ import { SHOP } from '../constants';
 
 const INITIAL_STATE = {
     collections: null,
-    isFetching: false,
+    isFetching: true,
     errorMessage: undefined
 };
 

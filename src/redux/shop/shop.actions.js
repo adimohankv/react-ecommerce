@@ -13,12 +13,15 @@ export const fetchCollectionsStartAsync = () => {
 
         dispatch(fetchCollectionsStart());
 
-        collectionRef.get().then(snapshot => {
-            const collection = convertCollectionsSnapshotToMap(snapshot);
+        collectionRef.get()
+            .then(snapshot => {
+                const collection = convertCollectionsSnapshotToMap(snapshot);
 
-            dispatch(fetchCollectionSuccess(collection));
-        }).catch(error => {
-            dispatch(fetchCollectionsFailure(error));
+                dispatch(fetchCollectionSuccess(collection));
+            })
+            .catch(error => {
+                dispatch(fetchCollectionsFailure(error)
+            );
         });
     };
 };
