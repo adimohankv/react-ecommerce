@@ -7,6 +7,7 @@ import Collection from '../collection/collection';
 import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
 import { selectIsFetching } from '../../redux/shop/shop.selectors';
 import WithSpinner from '../../components/with-spinner/with-spinner';
+import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview.container';
 
 const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview);
 const CollectionWithSpinner = WithSpinner(Collection);
@@ -23,10 +24,8 @@ class ShopPage extends React.Component {
             <div className="shop-page">
                 <Route 
                     exact 
-                    path={`${match.path}`} 
-                    render={(props) => 
-                        <CollectionOverviewWithSpinner isLoading={isCollectionFetching} {...props} />
-                    }
+                    path={`${match.path}`}
+                    component={CollectionsOverviewContainer}
                 />
                 <Route 
                     path={`${match.path}:collectionId`} 
