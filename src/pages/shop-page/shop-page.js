@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import CollectionOverview from '../../components/collections-overview/collections-overview';
 import Collection from '../collection/collection';
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStart } from "../../redux/shop/shop.actions";
 import { selectIsFetching } from '../../redux/shop/shop.selectors';
 import WithSpinner from '../../components/with-spinner/with-spinner';
 
@@ -13,7 +13,7 @@ const CollectionWithSpinner = WithSpinner(Collection);
 
 class ShopPage extends React.Component {
     componentDidMount() {
-        this.props.fetchCollectionsStartAsync();
+        this.props.fetchCollectionsStart();
     };
 
     render() {
@@ -47,8 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
-    }
+      fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShopPage);

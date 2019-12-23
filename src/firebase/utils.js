@@ -14,7 +14,7 @@ const config = {
 
 firebase.initializeApp(config);
 
-const provider = new firebase.auth.GoogleAuthProvider();
+export const provider = new firebase.auth.GoogleAuthProvider();
 
 provider.setCustomParameters({promt: 'select_account'});
 
@@ -79,6 +79,17 @@ export const convertCollectionsSnapshotToMap = (collection) =>{
         return acc;
     }, {});
 };
+
+export const getCurrentUser = () => {
+    const checkUserPromise = new Promise((resolve, reject) => {
+        const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+            unsubscribe();
+            resolve(userAuth);
+        }, reject);
+    });
+
+    return checkUserPromise;
+}
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

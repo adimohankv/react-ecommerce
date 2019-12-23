@@ -8,34 +8,14 @@ import Header from './components/header/header';
 import Login from './pages/login-page/login-page';
 import Checkout from './pages/checkout/checkout';
 
-import { auth, createUserProfileDocument } from './firebase/utils';
-import { setCurrentUser } from './redux/user/user.actions';
+import { checkUserSession } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector';
 
 import './App.css';
 
 class App extends React.Component {
     componentDidMount() {
-        const { setCurrentUser } = this.props;
-
-        this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-            if (userAuth) {
-                const userRef = await createUserProfileDocument(userAuth);
-
-                userRef.onSnapshot(snapshot => {
-                    setCurrentUser({
-                            id: snapshot.id,
-                            ...snapshot.data()
-                    }, () => console.log(userRef));
-                });
-            } else {
-                setCurrentUser(userAuth)
-            };
-        })
-    };
-
-    componentWillUnmount() {
-        this.unsubscribeFromAuth();
+        this.props.checkUserSession();
     };
 
     render() {
@@ -60,13 +40,11 @@ const mapStateToProps = (state) => {
     return {
         currentUser: selectCurrentUser(state)
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCurrentUser: (user) => {
-            dispatch(setCurrentUser(user));
-        }
+        checkUserSession: () => dispatch(checkUserSession())
     }
 }
 

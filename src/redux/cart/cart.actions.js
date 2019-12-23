@@ -25,4 +25,10 @@ export const reduceQuantity = (item) => {
         type: CART.REDUCE_QUANTITY,
         payload: item
     }
+};
+
+export const clearCart = () => {
+    return {
+        type: CART.CLEAR_CART
+    }
 }

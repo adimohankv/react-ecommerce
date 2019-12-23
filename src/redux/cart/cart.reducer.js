@@ -27,6 +27,11 @@ const cartReducer = (state = INITIAL_STATE, action) =>{
             return {
                 ...state,
                 cartItems: reduceQuantity(state.cartItems, action.payload)
+            };
+        case CART.CLEAR_CART:
+            return {
+                ...state,
+                cartItems: []
             }
         default:
             return state;
