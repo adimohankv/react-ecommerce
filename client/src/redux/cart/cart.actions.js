@@ -31,4 +31,11 @@ export const clearCart = () => {
     return {
         type: CART.CLEAR_CART
     }
-}
+};
+
+export const setUserCartItem = (cartItems) => {
+    return {
+        type: CART.UPDATE_CART_ITEM,
+        payload: cartItems
+    }
+};

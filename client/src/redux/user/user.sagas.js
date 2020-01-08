@@ -11,11 +11,9 @@ import { signInSuccess,
 
 function* getUserSnapshot(user, aditionalData) {
     try {
-        
         const userRef = yield call(createUserProfileDocument, user, aditionalData);
 
         const userSnapshot = yield userRef.get();
-        console.log(userSnapshot, userRef, user);
         yield put(signInSuccess({id: userSnapshot.id, ...userSnapshot.data()}));
     } catch(error) {
         yield put(signInFailure(error));
@@ -49,7 +47,7 @@ function* checkUserSession() {
         if (!userAuth) {
             return;
         }
-        
+
         yield call(getUserSnapshot, userAuth);
     } catch (error) {
         yield put(signInFailure(error));
@@ -68,9 +66,9 @@ function* signOut() {
 
 function* signUp({payload: {email, password, displayName}}) {
     try {
-        const a = yield auth.createUserWithEmailAndPassword(email, password);
-        console.log(a)
-        yield getUserSnapshot(a.user, {displayName});
+        const user = yield auth.createUserWithEmailAndPassword(email, password);
+
+        yield getUserSnapshot(user.user, {displayName});
     } catch(error) {
         yield put(signUpFailure(error));
     }

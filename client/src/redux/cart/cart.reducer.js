@@ -32,6 +32,11 @@ const cartReducer = (state = INITIAL_STATE, action) =>{
             return {
                 ...state,
                 cartItems: []
+            };
+        case CART.UPDATE_CART_ITEM:
+            return {
+                ...state,
+                cartItems: action.payload
             }
         default:
             return state;

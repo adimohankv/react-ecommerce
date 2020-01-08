@@ -17,7 +17,8 @@ export const CART = Object.freeze({
     ADD_ITEM: "ADD_ITEM",
     REMOVE_ITEM: "REMOVE_ITEM",
     REDUCE_QUANTITY: "REDUCE_QUANTITY",
-    CLEAR_CART: "CLEAR_CART"
+    CLEAR_CART: "CLEAR_CART",
+    UPDATE_CART_ITEM: "UPDATE_CART_ITEM"
 });
 
 export const SHOP = Object.freeze({

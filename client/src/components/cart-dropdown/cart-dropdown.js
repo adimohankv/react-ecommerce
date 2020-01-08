@@ -10,7 +10,6 @@ import { toggleCartHidden } from '../../redux/cart/cart.actions';
 import './cart-dropdown.scss';
 
 const CartDropdown = (props) => {
-    console.log(props);
     return (
         <div className="cart-dropdown">
             <div className="cart-items">

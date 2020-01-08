@@ -24,7 +24,6 @@ export const createUserProfileDocument = async (userAuth, aditionalData) => {
     }
 
     const userRef = firestore.doc(`/user/${userAuth.uid}`);
-    
     const snapshot = await userRef.get();
 
     if (!snapshot.exists) {
@@ -46,11 +45,32 @@ export const createUserProfileDocument = async (userAuth, aditionalData) => {
     return userRef;
 };
 
+export const updateCartItems = (userId, cartItems) => {
+    try {
+        const userRef = firestore.doc(`/user/${userId}`);
+
+        userRef.update({ cartItems });
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const getCartItems = async (userId) => {
+    try {
+        const snapshot = await firestore.doc(`/user/${userId}`).get();
+        if(snapshot.exists) {
+            return snapshot.data().cartItems;
+        } else {
+            return [];
+        };  
+    } catch (error) {
+        console.error('Failed to load cart items', error);
+    }
+};
+
+// used to add initial data
 export const addCollectionAndDocuments = (collectionsKey, objectsToAdd) => {
     const collectionRef = firestore.collection(collectionsKey);
-
-    console.log(collectionRef);
-
     const batch = firestore.batch();
 
     objectsToAdd.forEach(obj => {
